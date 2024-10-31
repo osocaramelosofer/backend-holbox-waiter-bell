@@ -19,8 +19,7 @@ phases:
 
   post_build:
     commands:
-      - echo Starting the application...
-      - npm run start
+      - echo Build and packaging completed.
 
 artifacts:
   files:
