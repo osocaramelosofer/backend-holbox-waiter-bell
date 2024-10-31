@@ -10,7 +10,7 @@ const port = 3000;
 // Middleware to handle JSON
 app.use(express_1.default.json());
 app.get('/', (req, res) => {
-    res.send("hello world setup pipeline :D!");
+    res.send("hello world setup pipeline :D second try!");
 });
 app.listen(port, () => {
     console.log(`Server running at port http://localhost:${port}`);
