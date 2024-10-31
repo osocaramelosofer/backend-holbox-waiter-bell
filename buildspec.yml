@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo Installing dependencies...
+      - npm install
+
+  pre_build:
+    commands:
+      - echo Compiling TypeScript files...
+      - npm run build
+
+  build:
+    commands:
+      - echo Build phase completed. Ready to deploy.
+
+  post_build:
+    commands:
+      - echo Starting the application...
+      - npm run start
+
+artifacts:
+  files:
+    - "**/*"
+  base-directory: dist
+
+cache:
+  paths:
+    - node_modules/**/*
