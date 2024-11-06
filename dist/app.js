@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const express_2 = require("./config/express");
 const app = (0, express_2.createApp)();
-const port = 8080;
+const port = process.env.PORT || 3000;
 // Middleware to handle JSON
 app.use(express_1.default.json());
 app.get('/', (req, res) => {
