@@ -3,10 +3,12 @@ import { createApp } from './config/express';
 import logger from 'morgan'
 import {Server} from 'socket.io'
 import {createServer} from 'node:http'
+import 'dotenv/config'; 
 
 const app = createApp();
 
 const port = process.env.PORT || 3000;
+console.log("===> ",process.env.FRONTEND_URL)
 
 // Middleware to handle JSON
 app.use(express.json())
@@ -18,13 +20,14 @@ const server = createServer(app)
 const io = new Server(server, {
     connectionStateRecovery: {},
     cors: {
-      origin: 'http://localhost:3001', // Reemplaza con el origen de tu cliente
+      origin: `${process.env.FRONTEND_URL}`, // Reemplaza con el origen de tu cliente
       methods: ['GET', 'POST']
     }
 })
 
 io.on('connection', (socket) => {
     console.log('an user has connected!')
+    console.log(process.env.FRONTEND_URL)
 
     socket.on('join table', (msg) => {
         console.log("escuchando emits para join table")
