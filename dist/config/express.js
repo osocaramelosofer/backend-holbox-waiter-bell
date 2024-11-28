@@ -14,8 +14,20 @@ const createApp = () => {
     // Middleware para parsear cuerpos en JSON y URL encoded
     app.use(express_1.default.json());
     app.use(express_1.default.urlencoded({ extended: true }));
+    const allowedOrigins = [
+        'https://waiter-bell-frontend.vercel.app',
+        'http://localhost:3000'
+    ];
     // Configurar CORS
     app.use((0, cors_1.default)({
+        origin: (origin, callback) => {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            }
+            else {
+                callback(new Error('Origen no permitido por CORS'));
+            }
+        },
         allowedHeaders: [
             'Origin',
             'X-Requested-With',

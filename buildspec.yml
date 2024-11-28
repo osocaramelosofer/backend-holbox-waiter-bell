@@ -23,8 +23,10 @@ phases:
 
 artifacts:
   files:
-    - "**/*"
-  base-directory: dist
+    - "dist/**/*" # Archivos compilados en dist
+    - "package.json"
+    - "package-lock.json"
+    - "!node_modules/**" # Opcional, si no quieres incluir node_modules
 
 cache:
   paths:

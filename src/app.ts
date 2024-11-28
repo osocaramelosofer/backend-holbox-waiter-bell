@@ -15,13 +15,19 @@ app.use(express.json())
 app.use(logger('dev'))
 
 const server = createServer(app)
-
+const allowedOrigins = [
+    'https://waiter-bell-frontend.vercel.app',
+    'http://localhost:3001',
+    'http://localhost:3000',
+    'https://waiter-bell-frontend-qnksjohfm-ferras-projects.vercel.app'
+  ]
 // Configurar el servidor de Socket.IO con CORS habilitado
 const io = new Server(server, {
     connectionStateRecovery: {},
     cors: {
-      origin: `${process.env.FRONTEND_URL}`, // Reemplaza con el origen de tu cliente
-      methods: ['GET', 'POST']
+      origin: allowedOrigins, // Reemplaza con el origen de tu cliente
+      methods: ['GET', 'POST'],
+      credentials: true
     }
 })
 

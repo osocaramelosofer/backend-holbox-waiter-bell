@@ -12,8 +12,19 @@ export const createApp = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  const allowedOrigins = [
+    'https://waiter-bell-frontend.vercel.app',
+    'http://localhost:3000'
+  ]
   // Configurar CORS
   app.use(cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Origen no permitido por CORS'));
+      }
+    },
     allowedHeaders: [
       'Origin',
       'X-Requested-With',
